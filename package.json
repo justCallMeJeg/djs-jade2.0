@@ -4,5 +4,25 @@
   "main": "index.js",
   "repository": "https://github.com/justCallMejade/djs-jade2.0",
   "author": "justCallMeJade <87892483+justCallMejade@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "pino": "^8.8.0",
+    "pino-pretty": "^9.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1",
+    "prisma": "^4.7.1",
+    "sucrase": "^3.29.0",
+    "ts-standard": "^12.0.1",
+    "typescript": "^4.9.4"
+  }
 }
