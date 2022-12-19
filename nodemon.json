@@ -1,0 +1,14 @@
+{
+    "restartable": "rs",
+    "delay": 5000,
+    "verbose": true,
+    "ignore": ["node_modules/"],
+    "watch": [
+        "dist",
+        "src"
+    ],
+    "execMap": {
+        "ts": "sucrase-node",
+        "js": "node"
+    }
+}
