@@ -5,24 +5,38 @@
   "repository": "https://github.com/justCallMejade/djs-jade2.0",
   "author": "justCallMeJade <87892483+justCallMejade@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "dev:run/node": "tsc -w && yarn run prisma:dev && nodemon ./dist/index.js",
+    "dev:run/nodemon": "tsc -w && yarn run prisma:dev && nodemon ./dist/index.js",
+    "dev:start:nodemon/ts": "yarn run prisma:dev && nodemon ./src/index.ts",
+    "dev:start:nodemon/js": "yarn run prisma:dev && nodemon ./dist/index.js",
+    "prod:start": "tsc && yarn run prisma:prod && node ./dist/index.js",
+    "tsc:build": "tsc -p tsconfig.json",
+    "tsc:watch": "tsc -p tsconfig.json --watch",
+    "prisma:dev": "prisma db push && prisma generate && prisma migrate dev",
+    "prisma:prod": "prisma db push && prisma generate && prisma migrate prod",
+    "style": "ts-standard --fix"
+  },
   "dependencies": {
+    "@prisma/client": "^4.10.1",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
-    "pino": "^8.8.0",
-    "pino-pretty": "^9.1.1"
+    "pino": "^8.10.0",
+    "pino-pretty": "^9.3.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.17",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
+    "@types/node": "^18.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.1",
-    "prisma": "^4.7.1",
+    "prettier": "^2.8.4",
+    "prisma": "^4.10.1",
     "sucrase": "^3.29.0",
-    "ts-standard": "^12.0.1",
-    "typescript": "^4.9.4"
+    "ts-standard": "^12.0.2",
+    "typescript": "^4.9.5"
   }
 }

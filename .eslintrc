@@ -1,15 +1,23 @@
 { 
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "project": "./tsconfig.json"
     },
     "extends": [
+        "standard-with-typescript",
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/restrict-template-expressions": "warn",
+        "@typescript-eslint/no-dynamic-delete": "off",
+        "@typescript-eslint/no-extraneous-class": "off",
+        "@typescript-eslint/key-spacing": "off",
+        "@typescript-eslint/consistent-type-imports": "warn",
         "prettier/prettier": "off"
     }
 }
