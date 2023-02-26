@@ -1,10 +1,10 @@
-import { type AutocompleteInteraction, type ButtonComponentData, type ButtonInteraction, type ChannelSelectMenuComponentData, type ChannelSelectMenuInteraction, type ChatInputApplicationCommandData, type CommandInteraction, type CommandInteractionOptionResolver, type Guild, type GuildMember, type MentionableSelectMenuComponentData, type MentionableSelectMenuInteraction, type Message, type MessageApplicationCommandData, type MessageContextMenuCommandInteraction, type ModalComponentData, type ModalSubmitInteraction, type PermissionResolvable, type RoleSelectMenuComponentData, type RoleSelectMenuInteraction, type StringSelectMenuComponentData, type StringSelectMenuInteraction, type TextBasedChannel, type User, type UserApplicationCommandData, type UserContextMenuCommandInteraction, type UserSelectMenuComponentData, type UserSelectMenuInteraction } from 'discord.js'
+import { type ChatInputCommandInteraction, type AutocompleteInteraction, type ButtonInteraction, type ChannelSelectMenuComponentData, type ChannelSelectMenuInteraction, type ChatInputApplicationCommandData, type CommandInteractionOptionResolver, type Guild, type GuildMember, type MentionableSelectMenuComponentData, type MentionableSelectMenuInteraction, type Message, type MessageApplicationCommandData, type MessageContextMenuCommandInteraction, type ModalComponentData, type ModalSubmitInteraction, type PermissionResolvable, type RoleSelectMenuComponentData, type RoleSelectMenuInteraction, type StringSelectMenuComponentData, type StringSelectMenuInteraction, type TextBasedChannel, type User, type UserApplicationCommandData, type UserContextMenuCommandInteraction, type UserSelectMenuComponentData, type UserSelectMenuInteraction, type ApplicationCommandType, type InteractionButtonComponentData } from 'discord.js'
 import type JadeClient from '../classes/JadeClient'
 
 // ------------------------------------------------------------
 
 // Interaction Response Types
-type InteractionResponse =
+export type InteractionResponse =
     | 'DeferReply'
     | 'DeferReplyEphemeral'
     | 'DeferredMessageUpdate'
@@ -12,7 +12,7 @@ type InteractionResponse =
     | 'Modal'
 
 // Command Category Types
-type CommandCategoryTypes =
+export type CommandCategoryTypes =
     | 'Information'
     | 'Moderation'
     | 'Games'
@@ -20,12 +20,12 @@ type CommandCategoryTypes =
     | 'Miscellaneous'
 
 // Interaction Status Reason Types
-type InteractionStatuses = 'Bug' | 'Maintenance'
+export type InteractionStatusReasonTypes = 'Bug' | 'Maintenance'
 
 // Interaction Status Interface
-interface InteractionStatus {
+export interface InteractionStatus {
   enabled: boolean
-  reason?: InteractionStatuses
+  reason?: InteractionStatusReasonTypes
 }
 
 // ------------------------------------------------------------
@@ -38,8 +38,8 @@ export interface ExtendedAutocompleteInteraction extends AutocompleteInteraction
   user: User
 };
 
-// Extended Command Interaction
-export interface ExtendedCommandInteraction extends CommandInteraction {
+// Extended Chat Input Command Interaction
+export interface ExtendedChatInputCommandInteraction extends ChatInputCommandInteraction {
   channel: TextBasedChannel
   guild: Guild
   member: GuildMember
@@ -132,17 +132,25 @@ export interface ExtendedModalSubmitInteraction extends ModalSubmitInteraction {
 
 // Extended Interactions
 export type ExtendedInteractions =
-    | ExtendedAutocompleteInteraction
-    | ExtendedCommandInteraction
-    | ExtendedUserContextMenuCommandInteraction
-    | ExtendedMessageContextMenuCommandInteraction
-    | ExtendedButtonInteraction
-    | ExtendedStringSelectMenuInteraction
-    | ExtendedUserSelectMenuInteraction
-    | ExtendedRoleSelectMenuInteraction
-    | ExtendedMentionableSelectMenuInteraction
-    | ExtendedChannelSelectMenuInteraction
-    | ExtendedModalSubmitInteraction
+  | ExtendedAutocompleteInteraction
+  | ExtendedChatInputCommandInteraction
+  | ExtendedUserContextMenuCommandInteraction
+  | ExtendedMessageContextMenuCommandInteraction
+  | ExtendedButtonInteraction
+  | ExtendedStringSelectMenuInteraction
+  | ExtendedUserSelectMenuInteraction
+  | ExtendedRoleSelectMenuInteraction
+  | ExtendedMentionableSelectMenuInteraction
+  | ExtendedChannelSelectMenuInteraction
+  | ExtendedModalSubmitInteraction
+
+// Extended Select Menu Interactions
+export type ExtendedSelectMenuInteractions =
+  | ExtendedStringSelectMenuInteraction
+  | ExtendedUserSelectMenuInteraction
+  | ExtendedRoleSelectMenuInteraction
+  | ExtendedMentionableSelectMenuInteraction
+  | ExtendedChannelSelectMenuInteraction;
 
 // Repliable Extended Interactions
 export type RepliableExtendedInteractions = Exclude<ExtendedInteractions, ExtendedAutocompleteInteraction>
@@ -151,188 +159,205 @@ export type RepliableExtendedInteractions = Exclude<ExtendedInteractions, Extend
 
 // Base Interaction Execute Options
 interface BaseInteractionExecuteOptions {
-  client: JadeClient
+  // The Discord client instance
+  client: JadeClient;
 };
 
-// Base Chat Input Command Interaction Execute Options
-interface BaseChatInputCommandExecuteOptions extends BaseInteractionExecuteOptions {
-  args: CommandInteractionOptionResolver
-};
-
-// Autocomeplete Interaction Execute Options
+// Autocomplete Interaction Execute Options
 interface AutocompleteInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedAutocompleteInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedAutocompleteInteraction;
 };
 
 // Chat Input Command Interaction Execute Options
-interface ChatInputCommandInteractionExecuteOptions extends BaseChatInputCommandExecuteOptions {
-  interaction: ExtendedCommandInteraction
+interface ChatInputCommandInteractionExecuteOptions extends BaseInteractionExecuteOptions {
+  // The interaction that triggered this command
+  interaction: ExtendedChatInputCommandInteraction;
+  // The resolved arguments for this command
+  args: CommandInteractionOptionResolver;
 };
 
 // User Context Menu Command Interaction Execute Options
 interface UserContextMenuCommandInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedUserContextMenuCommandInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedUserContextMenuCommandInteraction;
 };
 
 // Message Context Menu Command Interaction Execute Options
 interface MessageContextMenuCommandInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedMessageContextMenuCommandInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedMessageContextMenuCommandInteraction;
 };
 
 // Button Interaction Execute Options
 interface ButtonInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedButtonInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedButtonInteraction;
 };
 
 // String Select Menu Interaction Execute Options
 interface StringSelectMenuInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedStringSelectMenuInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedStringSelectMenuInteraction;
 };
 
 // User Select Menu Interaction Execute Options
 interface UserSelectMenuInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedUserSelectMenuInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedUserSelectMenuInteraction;
 };
 
 // Role Select Menu Interaction Execute Options
 interface RoleSelectMenuInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedRoleSelectMenuInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedRoleSelectMenuInteraction;
 };
 
 // Mentionable Select Menu Interaction Execute Options
 interface MentionableSelectMenuInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedMentionableSelectMenuInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedMentionableSelectMenuInteraction;
 };
 
 // Channel Select Menu Interaction Execute Options
 interface ChannelSelectMenuInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedChannelSelectMenuInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedChannelSelectMenuInteraction;
 };
 
 // Modal Submit Interaction Execute Options
 interface ModalSubmitInteractionExecuteOptions extends BaseInteractionExecuteOptions {
-  interaction: ExtendedModalSubmitInteraction
+  // The interaction that triggered this command
+  interaction: ExtendedModalSubmitInteraction;
 };
 
 // ------------------------------------------------------------
 
 // Autocomplete Interaction Execute Function
+// Function signature for handling autocomplete interactions
 type AutocompleteInteractionExecuteFunction = (options: AutocompleteInteractionExecuteOptions) => Promise<any>
 
 // Chat Input Command Interaction Execute Function
+// Function signature for handling chat input command interactions
 type ChatInputCommandInteractionExecuteFunction = (options: ChatInputCommandInteractionExecuteOptions) => Promise<any>
 
 // User Context Menu Command Interaction Execute Function
+// Function signature for handling user context menu command interactions
 type UserContextMenuCommandInteractionExecuteFunction = (options: UserContextMenuCommandInteractionExecuteOptions) => Promise<any>
 
 // Message Context Menu Command Interaction Execute Function
+// Function signature for handling message context menu command interactions
 type MessageContextMenuCommandInteractionExecuteFunction = (options: MessageContextMenuCommandInteractionExecuteOptions) => Promise<any>
 
 // Button Interaction Execute Function
+// Function signature for handling button interactions
 type ButtonInteractionExecuteFunction = (options: ButtonInteractionExecuteOptions) => Promise<any>
 
 // String Select Menu Interaction Execute Function
+// Function signature for handling string select menu interactions
 type StringSelectMenuInteractionExecuteFunction = (options: StringSelectMenuInteractionExecuteOptions) => Promise<any>
 
 // User Select Menu Interaction Execute Function
+// Function signature for handling user select menu interactions
 type UserSelectMenuInteractionExecuteFunction = (options: UserSelectMenuInteractionExecuteOptions) => Promise<any>
 
 // Role Select Menu Interaction Execute Function
+// Function signature for handling role select menu interactions
 type RoleSelectMenuInteractionExecuteFunction = (options: RoleSelectMenuInteractionExecuteOptions) => Promise<any>
 
 // Mentionable Select Menu Interaction Execute Function
+// Function signature for handling mentionable select menu interactions
 type MentionableSelectMenuInteractionExecuteFunction = (options: MentionableSelectMenuInteractionExecuteOptions) => Promise<any>
 
 // Channel Select Menu Interaction Execute Function
+// Function signature for handling channel select menu interactions
 type ChannelSelectMenuInteractionExecuteFunction = (options: ChannelSelectMenuInteractionExecuteOptions) => Promise<any>
 
 // Modal Submit Interaction Execute Function
+// Function signature for handling modal submit interactions
 type ModalSubmitInteractionExecuteFunction = (options: ModalSubmitInteractionExecuteOptions) => Promise<any>
 
 // ------------------------------------------------------------
 
 // Base Interaction Type
 interface BaseInteractionType {
-  status: InteractionStatus | boolean
-  userPermissions?: PermissionResolvable[]
-  replyType?: InteractionResponse
+  status: InteractionStatus | boolean;
+  userPermissions?: PermissionResolvable[];
+  replyType?: InteractionResponse;
 }
 
-// Extended Chat Input Application Command Data Type
-type ExtendedChatInputApplicationCommandData = BaseInteractionType & {
-  category: CommandCategoryTypes
-} & ChatInputApplicationCommandData
-
 // Chat Input Command Interaction Type
-export type ChatInputCommandInteractionType = {
-  autocompleteHandler?: AutocompleteInteractionExecuteFunction
-  callbackHandler: ChatInputCommandInteractionExecuteFunction
-} & ExtendedChatInputApplicationCommandData
+export interface ChatInputCommandInteractionType extends BaseInteractionType, ChatInputApplicationCommandData {
+  type: ApplicationCommandType.ChatInput;
+  category: CommandCategoryTypes;
+  autocompleteHandler?: AutocompleteInteractionExecuteFunction;
+  callbackHandler: ChatInputCommandInteractionExecuteFunction;
+}
 
 // User Context Menu Command Interaction Type
-export type UserContextMenuCommandInteractionType = {
-  callbackHandler: UserContextMenuCommandInteractionExecuteFunction
-} & BaseInteractionType & UserApplicationCommandData
+export interface UserContextMenuCommandInteractionType extends BaseInteractionType, UserApplicationCommandData {
+  type: ApplicationCommandType.User;
+  callbackHandler: UserContextMenuCommandInteractionExecuteFunction;
+}
 
 // Message Context Menu Command Interaction Type
-export type MessageContextMenuCommandInteractionType = {
-  callbackHandler: MessageContextMenuCommandInteractionExecuteFunction
-} & BaseInteractionType & MessageApplicationCommandData
-
-// Context Menu Command Interaction Type
-export type ContextMenuCommandInteractionTypes =
-    | UserContextMenuCommandInteractionType
-    | MessageContextMenuCommandInteractionType
+export interface MessageContextMenuCommandInteractionType extends BaseInteractionType, MessageApplicationCommandData {
+  type: ApplicationCommandType.Message;
+  callbackHandler: MessageContextMenuCommandInteractionExecuteFunction;
+}
 
 // Application Command Interaction Types
-export type ApplicationCommandInteractionType =
-    | ChatInputCommandInteractionType
-    | ContextMenuCommandInteractionTypes
+export type CommandInteractionType =
+  | ChatInputCommandInteractionType
+  | UserContextMenuCommandInteractionType
+  | MessageContextMenuCommandInteractionType;
 
 // Button Interaction Type
 export type ButtonInteractionType = BaseInteractionType & {
-  callbackHandler: ButtonInteractionExecuteFunction
-} & ButtonComponentData
+  callbackHandler: ButtonInteractionExecuteFunction;
+} & InteractionButtonComponentData;
 
 // String Select Menu Interaction Type
-export type StringSelectMenuInteractionType = BaseInteractionType & {
-  callbackHandler: StringSelectMenuInteractionExecuteFunction
-} & StringSelectMenuComponentData
+export interface StringSelectMenuInteractionType extends BaseInteractionType, StringSelectMenuComponentData {
+  callbackHandler: StringSelectMenuInteractionExecuteFunction;
+}
 
 // User Select Menu Interaction Type
-export type UserSelectMenuInteractionType = BaseInteractionType & {
-  callbackHandler: UserSelectMenuInteractionExecuteFunction
-} & UserSelectMenuComponentData
+export interface UserSelectMenuInteractionType extends BaseInteractionType, UserSelectMenuComponentData {
+  callbackHandler: UserSelectMenuInteractionExecuteFunction;
+}
 
 // Role Select Menu Interaction Type
-export type RoleSelectMenuInteractionType = BaseInteractionType & {
-  callbackHandler: RoleSelectMenuInteractionExecuteFunction
-} & RoleSelectMenuComponentData
+export interface RoleSelectMenuInteractionType extends BaseInteractionType, RoleSelectMenuComponentData {
+  callbackHandler: RoleSelectMenuInteractionExecuteFunction;
+}
 
 // Mentionable Select Menu Interaction Type
-export type MentionableSelectMenuInteractionType = BaseInteractionType & {
-  callbackHandler: MentionableSelectMenuInteractionExecuteFunction
-} & MentionableSelectMenuComponentData
+export interface MentionableSelectMenuInteractionType extends BaseInteractionType, MentionableSelectMenuComponentData {
+  callbackHandler: MentionableSelectMenuInteractionExecuteFunction;
+}
 
 // Channel Select Menu Interaction Type
-export type ChannelSelectMenuInteractionType = BaseInteractionType & {
-  callbackHandler: ChannelSelectMenuInteractionExecuteFunction
-} & ChannelSelectMenuComponentData
+export interface ChannelSelectMenuInteractionType extends BaseInteractionType, ChannelSelectMenuComponentData {
+  callbackHandler: ChannelSelectMenuInteractionExecuteFunction;
+}
 
-// Select Menu Interaction Type
-export type SelectMenuInteractionTypes =
+// Select Menu Interaction Types
+export type AnySelectMenuInteractionType =
   | StringSelectMenuInteractionType
   | UserSelectMenuInteractionType
   | RoleSelectMenuInteractionType
   | MentionableSelectMenuInteractionType
-  | ChannelSelectMenuInteractionType
+  | ChannelSelectMenuInteractionType;
 
 // Message Component Interaction Types
 export type MessageComponentInteractionType =
   | ButtonInteractionType
-  | SelectMenuInteractionTypes
+  | AnySelectMenuInteractionType;
 
 // Modal Submit Interaction Type
-export type ModalSubmitInteractionType = BaseInteractionType & {
-  callbackHandler: ModalSubmitInteractionExecuteFunction
-} & ModalComponentData
+export interface ModalSubmitInteractionType extends BaseInteractionType, ModalComponentData {
+  callbackHandler: ModalSubmitInteractionExecuteFunction;
+}
+
+// ------------------------------------------------------------
