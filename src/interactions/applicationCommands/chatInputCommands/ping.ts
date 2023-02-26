@@ -9,7 +9,7 @@ export default new ChatInputCommandInteraction({
   status: true,
   replyType: 'DeferReplyEphemeral',
   callbackHandler: async ({ interaction }) => {
-    await interaction.deferReply({ephemeral: true})
+    await interaction.deferReply({ ephemeral: true })
     await interaction.followUp({ content: 'Pong!' })
   }
 })

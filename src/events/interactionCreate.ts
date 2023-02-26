@@ -9,31 +9,31 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
 
   /**
    * Interaction Handler for Autocomplete Commands
-   * 
+   *
    * Command; SubCommand; SubCommandGroup
    */
   if (interaction.isAutocomplete()) {
-    const { options, commandName } = interaction;
-    const interactionData = applicationCommands.get(commandName);
-    if (interactionData === undefined) return;
+    const { options, commandName } = interaction
+    const interactionData = applicationCommands.get(commandName)
+    if (interactionData === undefined) return
 
-    const chatInputData = interactionData as ChatInputCommandInteractionType;
-    if (chatInputData.autocompleteHandler === undefined) return;
+    const chatInputData = interactionData as ChatInputCommandInteractionType
+    if (chatInputData.autocompleteHandler === undefined) return
 
-    const subCmd = options.getSubcommand(false);
-    const subCmdGroup = options.getSubcommandGroup(false);
-    const isSubcommandGroup = subCmdGroup !== null;
-    const isSubcommand = subCmd !== null;
+    const subCmd = options.getSubcommand(false)
+    const subCmdGroup = options.getSubcommandGroup(false)
+    const isSubcommandGroup = subCmdGroup !== null
+    const isSubcommand = subCmd !== null
 
     if (isSubcommandGroup) {
       // Autocomplete: Subcommand Group
-      client.logger.info('Interaction Detected | Autocomplete: Subcommand Group');
+      client.logger.info('Interaction Detected | Autocomplete: Subcommand Group')
     } else if (isSubcommand) {
       // Autocomplete: Subcommand
-      client.logger.info('Interaction Detected | Autocomplete: Subcommand');
+      client.logger.info('Interaction Detected | Autocomplete: Subcommand')
     } else {
       // Autocomplete: Command
-      await chatInputData.autocompleteHandler({ client, interaction: interaction as ExtendedAutocompleteInteraction });
+      await chatInputData.autocompleteHandler({ client, interaction: interaction as ExtendedAutocompleteInteraction })
     }
   }
 
@@ -49,19 +49,19 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
   */
   if (interaction.isCommand()) {
     // Interaction is an Application Command
-    const interactionData = applicationCommands.get(interaction.commandName);
-    if (interactionData === undefined) return;
+    const interactionData = applicationCommands.get(interaction.commandName)
+    if (interactionData === undefined) return
 
     if (interaction.isChatInputCommand()) {
       // Application Command: Chat Input (Slash Commands)
-      const { options } = interaction;
+      const { options } = interaction
 
-      const chatInputData = interactionData as ChatInputCommandInteractionType;
+      const chatInputData = interactionData as ChatInputCommandInteractionType
 
-      const subCmd = options.getSubcommand(false);
-      const subCmdGroup = options.getSubcommandGroup(false);
-      const isSubcommandGroup = subCmdGroup !== null;
-      const isSubcommand = subCmd !== null;
+      const subCmd = options.getSubcommand(false)
+      const subCmdGroup = options.getSubcommandGroup(false)
+      const isSubcommandGroup = subCmdGroup !== null
+      const isSubcommand = subCmd !== null
 
       if (isSubcommand) {
         if (isSubcommandGroup) {
@@ -73,26 +73,26 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
       }
       // Chat Input: Command
       await chatInputData.callbackHandler({
-        client, 
+        client,
         interaction: interaction as ExtendedChatInputCommandInteraction,
         args: interaction.options as CommandInteractionOptionResolver
-      });
+      })
     } else if (interaction.isContextMenuCommand()) {
       // Application Command: Context Menu
       if (interaction.isUserContextMenuCommand()) {
         // Context Menu: User
-        const contextMenuData = interactionData as UserContextMenuCommandInteractionType;
+        const contextMenuData = interactionData as UserContextMenuCommandInteractionType
         await contextMenuData.callbackHandler({
           client,
-          interaction: interaction as ExtendedUserContextMenuCommandInteraction,
-        });
+          interaction: interaction as ExtendedUserContextMenuCommandInteraction
+        })
       } else if (interaction.isMessageContextMenuCommand()) {
         // Context Menu: Message
-        const contextMenuData = interactionData as MessageContextMenuCommandInteractionType;
+        const contextMenuData = interactionData as MessageContextMenuCommandInteractionType
         await contextMenuData.callbackHandler({
           client,
-          interaction: interaction as ExtendedMessageContextMenuCommandInteraction,
-        });
+          interaction: interaction as ExtendedMessageContextMenuCommandInteraction
+        })
       }
     }
   }
@@ -107,33 +107,33 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
   if (interaction.isMessageComponent()) {
     // Interaction is a Message Component
     const interactionData = messageComponents.get(interaction.customId)
-    if (interactionData === undefined) return;
+    if (interactionData === undefined) return
 
     if (interaction.isButton()) {
       // Message Component: Button
-      const buttonData = interactionData as ButtonInteractionType;
+      const buttonData = interactionData as ButtonInteractionType
       await buttonData.callbackHandler({
         client, interaction: interaction as ExtendedButtonInteraction
       })
     } else if (interaction.isAnySelectMenu()) {
       // Message Component: Select Menu
-      const selectMenuData = interactionData as AnySelectMenuInteractionType;
+      const selectMenuData = interactionData as AnySelectMenuInteractionType
 
       if (interaction.isStringSelectMenu()) {
         await (selectMenuData as StringSelectMenuInteractionType)
-          .callbackHandler({ client, interaction: interaction as ExtendedStringSelectMenuInteraction });
+          .callbackHandler({ client, interaction: interaction as ExtendedStringSelectMenuInteraction })
       } else if (interaction.isUserSelectMenu()) {
         await (selectMenuData as UserSelectMenuInteractionType)
-          .callbackHandler({ client, interaction: interaction as ExtendedUserSelectMenuInteraction });
+          .callbackHandler({ client, interaction: interaction as ExtendedUserSelectMenuInteraction })
       } else if (interaction.isRoleSelectMenu()) {
         await (selectMenuData as RoleSelectMenuInteractionType)
-          .callbackHandler({ client, interaction: interaction as ExtendedRoleSelectMenuInteraction });
+          .callbackHandler({ client, interaction: interaction as ExtendedRoleSelectMenuInteraction })
       } else if (interaction.isMentionableSelectMenu()) {
         await (selectMenuData as MentionableSelectMenuInteractionType)
-          .callbackHandler({ client, interaction: interaction as ExtendedMentionableSelectMenuInteraction });
+          .callbackHandler({ client, interaction: interaction as ExtendedMentionableSelectMenuInteraction })
       } else if (interaction.isChannelSelectMenu()) {
         await (selectMenuData as ChannelSelectMenuInteractionType)
-          .callbackHandler({ client, interaction: interaction as ExtendedChannelSelectMenuInteraction });
+          .callbackHandler({ client, interaction: interaction as ExtendedChannelSelectMenuInteraction })
       }
     }
   }
@@ -145,9 +145,9 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
    */
   if (interaction.isModalSubmit()) {
     // Interaction is a Modal Submition
-    
-    const interactionData = modalSubmissions.get(interaction.customId);
-    if (interactionData === undefined) return;
+
+    const interactionData = modalSubmissions.get(interaction.customId)
+    if (interactionData === undefined) return
     await interactionData.callbackHandler({
       client, interaction: interaction as ExtendedModalSubmitInteraction
     })

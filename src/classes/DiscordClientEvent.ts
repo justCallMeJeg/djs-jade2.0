@@ -1,9 +1,9 @@
-import type { ClientEvents } from 'discord.js';
-import type JadeClient from './JadeClient';
+import type { ClientEvents } from 'discord.js'
+import type JadeClient from './JadeClient'
 
 export default class DiscordClientEvent<Key extends keyof ClientEvents> {
-  constructor(
+  constructor (
     public eventName: Key,
-    public listener: (client: JadeClient, ...args: ClientEvents[Key]) => any,
+    public listener: (client: JadeClient, ...args: ClientEvents[Key]) => any
   ) {}
 }
