@@ -1,10 +1,20 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="../../md/Images/JadeClient-Banner.png" alt="Jade Client" width="200" height="200"></a>
+    <a href="https://github.com/justCallMejade/djs-jade2.0">
+      <img src="../../md/Images/JadeClient Banner.png" alt="Jade Client" width="200" height="200">
+    </a>
   <br>Node.js Installation Guide<br>
 </h1>
 
-<p align="center">This guide will walk you through the process of installing Node.js on your computer.</p>
+<p align="center">Node.js is a free and open-source cross-platform JavaScript runtime environment that allows developers to build server-side applications using JavaScript. This guide will walk you through the process of installing Node.js on your computer.</p>
+
+<div align="center">
+  <a href="https://nodejs.org/en/download/">
+    <img src="../Images/NodeJS%20Download%20Page.jpg" alt="GitHub NodeJS Download Page" width="500">
+  </a>
+</div>
+
+---
 
 <h3 align="center">Setup by OS:</h3>
 <p align="center">
@@ -14,11 +24,13 @@
   <a href="#linux-fedora">Linux (Fedora) Setup</a>
 </p>
 
-## Step 1: Download Node.js
+---
 
-Go to the Node.js website and download the appropriate version for your operating system.
+## **Step 1: Download Node.js**
 
-## Step 2: Install Node.js
+Go to the **[Node.js website](https://nodejs.org/en/download/)** and download the appropriate version for your operating system.
+
+## **Step 2: Install Node.js**
 
 ### Windows
 
@@ -49,7 +61,7 @@ Click "Close" to complete the installation.
 1. Open a terminal window.
 Enter the following commands:
 
-    ```console
+    ```bash
     curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
     sudo apt-get install -y nodejs
     ```
@@ -62,7 +74,7 @@ Enter the following commands:
 1. Open a terminal window.
 2. Enter the following commands:
 
-    ```console
+    ```bash
     sudo dnf install -y gcc-c++ make
     curl -sL <https://rpm.nodesource.com/setup_16.x> | sudo bash -
     sudo dnf install -y nodejs
@@ -71,11 +83,11 @@ Enter the following commands:
 3. Press "Enter" to begin the installation.
 4. Wait for the installation to complete.
 
-## Step 3: Verify Installation
+## **Step 3: Verify Installation**
 
 To verify that Node.js has been installed correctly, open a terminal window and enter the following command:
 
-```powershell
+```ps
 node -v
 ```
 

@@ -1,10 +1,20 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="../../md/Images/JadeClient-Banner.png" alt="Jade Client" width="200" height="200"></a>
+    <a href="https://github.com/justCallMejade/djs-jade2.0">
+      <img src="../../md/Images/JadeClient Banner.png" alt="Jade Client" width="200" height="200">
+    </a>
   <br>Yarn Installation Guide<br>
 </h1>
 
-<p align="center">This guide will walk you through the process of installing Yarn on your computer.</p>
+<p align="center">Yarn is a package manager for JavaScript programming language that provides an alternative to npm, the default package manager for Node.js. It was developed by Facebook to address some of the limitations and performance issues in npm. Yarn allows for faster, more secure and reliable installation of packages by utilizing a caching mechanism and parallel execution. This guide will walk you through the process of installing Yarn on your computer.</p>
+
+<div align="center">
+  <a href="https://yarnpkg.com/en/docs/install">
+    <img src="../Images/Yarn%20Download%20Page.jpg" alt="Yarn Download Page" width="500">
+  </a>
+</div>
+
+---
 
 <h3 align="center">Setup by OS:</h3>
 <p align="center">
@@ -14,6 +24,8 @@
   <a href="#linux-debianubuntu">Linux (Debian/Ubuntu) Setup</a> •
   <a href="#linux-fedora">Linux (Fedora) Setup</a>
 </p>
+
+---
 
 ## Step 1: Download Yarn
 
@@ -38,7 +50,7 @@ Go to the **[Yarn website](https://yarnpkg.com/en/docs/install)** and download t
 1. Open a terminal window.
 2. Enter the following command:
 
-    ```ps
+    ```bash
     brew install yarn
     ```
 
@@ -50,7 +62,7 @@ Go to the **[Yarn website](https://yarnpkg.com/en/docs/install)** and download t
 1. Open a terminal window.
 2. Enter the following command:
 
-    ```ps
+    ```bash
     sudo port install yarn
     ```
 
@@ -62,7 +74,7 @@ Go to the **[Yarn website](https://yarnpkg.com/en/docs/install)** and download t
 1. Open a terminal window.
 2. Enter the following commands:
 
-    ```ps
+    ```bash
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt-get update && sudo apt-get install yarn
@@ -76,7 +88,7 @@ Go to the **[Yarn website](https://yarnpkg.com/en/docs/install)** and download t
 1. Open a terminal window.
 2. Enter the following commands:
 
-    ```ps
+    ```bash
     sudo dnf install curl
     curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
     sudo dnf install yarn
