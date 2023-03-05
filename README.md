@@ -11,7 +11,7 @@
 ---
 
 <p align="center">
-  <a href="./md/GettingStarted/README.md">Getting Started</a> •
+  <a href="./md/Getting Started/README.md">Getting Started</a> •
   <a href="">Project Setup</a> •
   <a href="">Contributing</a> •
   <a href="">Troubleshooting</a> •

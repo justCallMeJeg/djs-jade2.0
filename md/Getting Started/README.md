@@ -13,7 +13,9 @@
   <a href="./Git.md">Git Installation</a> •
   <a href="./NodeJS.md">NodeJS Installation</a> •
   <a href="./VSCode.md">VSCode Installation</a> •
-  <a href="./Yarn.md">Yarn Installation</a>
+  <a href="./Yarn.md">Yarn Installation</a> •
+  <a href="./PostgreSQL.md">PostgreSQL Installation</a> •
+  <a href="./GitHub Desktop.md">GitHub Desktop Installation</a> •
 </p>
 
 ---
