@@ -25,12 +25,12 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
     const isSubCmd = subCmd !== null
 
     if (isSubCmd) {
-      if (isSubCmdGroup){
+      if (isSubCmdGroup) {
         // Chat Input: Subcommand Group
         const subCmdData = chatInputData.optionHandler?.find((data) => {
           return data.name === `${subCmdGroup} ${subCmd}`
         })
-        if (subCmdData === undefined) return;
+        if (subCmdData === undefined) return
         return await subCmdData.autocompleteHandler({
           client, interaction: interaction as ExtendedAutocompleteInteraction
         })
@@ -39,7 +39,7 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
       const subCmdData = chatInputData.optionHandler?.find((data) => {
         return data.name === subCmd
       })
-      if (subCmdData === undefined) return;
+      if (subCmdData === undefined) return
       return await subCmdData.autocompleteHandler({
         client, interaction: interaction as ExtendedAutocompleteInteraction
       })
@@ -68,23 +68,24 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
     if (interaction.isChatInputCommand()) {
       // Application Command: Chat Input (Slash Commands)
       const { options } = interaction
-  
+
       const chatInputData = interactionData as SlashCommandInteractionType
-  
+
       const subCmd = options.getSubcommand(false)
       const subCmdGroup = options.getSubcommandGroup(false)
       const isSubCmdGroup = subCmdGroup !== null
       const isSubCmd = subCmd !== null
-  
+
       if (isSubCmd) {
         if (isSubCmdGroup) {
           // Chat Input: Subcommand Group
           const subCmdData = chatInputData.optionHandler?.find((data) => {
             return data.name === `${subCmdGroup} ${subCmd}`
           })
-          if (subCmdData === undefined) return;
+          if (subCmdData === undefined) return
           return await subCmdData.callbackHandler({
-            client, interaction: interaction as ExtendedChatInputCommandInteraction,
+            client,
+            interaction: interaction as ExtendedChatInputCommandInteraction,
             args: interaction.options as CommandInteractionOptionResolver
           })
         }
@@ -92,15 +93,17 @@ export default new DiscordClientEvent('interactionCreate', async (client, intera
         const subCmdData = chatInputData.optionHandler?.find((data) => {
           return data.name === subCmd
         })
-        if (subCmdData === undefined) return;
+        if (subCmdData === undefined) return
         return await subCmdData.callbackHandler({
-          client, interaction: interaction as ExtendedChatInputCommandInteraction,
+          client,
+          interaction: interaction as ExtendedChatInputCommandInteraction,
           args: interaction.options as CommandInteractionOptionResolver
         })
       }
       // Chat Input: Command
       return await chatInputData.callbackHandler({
-        client, interaction: interaction as ExtendedChatInputCommandInteraction,
+        client,
+        interaction: interaction as ExtendedChatInputCommandInteraction,
         args: interaction.options as CommandInteractionOptionResolver
       })
     } else if (interaction.isContextMenuCommand()) {

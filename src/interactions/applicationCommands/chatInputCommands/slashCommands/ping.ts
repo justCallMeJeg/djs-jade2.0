@@ -10,34 +10,34 @@ export default new SlashCommandInteraction({
   replyType: 'DeferReplyEphemeral',
   options: [
     {
-      name: `one`,
-      description: `First SubCommand Group`,
+      name: 'one',
+      description: 'First SubCommand Group',
       type: ApplicationCommandOptionType.SubcommandGroup,
       options: [
         {
-          name: `two`,
-          description: `Subcommand Group`,
+          name: 'two',
+          description: 'Subcommand Group',
           type: ApplicationCommandOptionType.Subcommand
         }
       ]
     },
     {
-      name: `subcommand`,
-      description: `Subcommand`,
+      name: 'subcommand',
+      description: 'Subcommand',
       type: ApplicationCommandOptionType.Subcommand
     }
   ],
   optionHandler: [
     {
-      name: `one two`,
-      callbackHandler: async({interaction}) => {
+      name: 'one two',
+      callbackHandler: async ({ interaction }) => {
         await interaction.deferReply({ ephemeral: true })
         await interaction.followUp({ content: 'SUBCOMMAND GROUP!' })
       }
     },
     {
-      name: `subcommand`,
-      callbackHandler: async({interaction}) => {
+      name: 'subcommand',
+      callbackHandler: async ({ interaction }) => {
         await interaction.deferReply({ ephemeral: true })
         await interaction.followUp({ content: 'SUBCOMMAND!' })
       }
