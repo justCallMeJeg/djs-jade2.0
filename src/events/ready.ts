@@ -1,7 +1,7 @@
 import { ActivityType } from 'discord.js'
 import DiscordClientEvent from '../classes/DiscordClientEvent'
 import type JadeClient from '../classes/JadeClient'
-import { type CommandInteractionType } from '../typings/interaction'
+import { type ApplicationCommandInteractionType } from '../typings/interaction'
 
 export default new DiscordClientEvent('ready', async (client: JadeClient) => {
   console.clear() // Clearing Logs
@@ -15,7 +15,7 @@ export default new DiscordClientEvent('ready', async (client: JadeClient) => {
   client.user?.setPresence({ activities: [{ name: '/help', type: ActivityType.Playing }], status: 'idle' })
 
   // Registering Application Commands
-  const applicationCommands: CommandInteractionType[] = []
+  const applicationCommands: ApplicationCommandInteractionType[] = []
   client.applicationCommands.each(command => applicationCommands.push(command))
   await client.application?.commands.set(applicationCommands)
 

@@ -6,12 +6,12 @@ import { PrismaClient } from '@prisma/client'
 import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js'
 import { type Logger } from 'pino'
 import { loadHandlers } from '../scripts/loader'
-import { type CommandInteractionType, type MessageComponentInteractionType, type ModalSubmitInteractionType } from '../typings/interaction'
+import { type ApplicationCommandInteractionType, type MessageComponentInteractionType, type ModalSubmitInteractionType } from '../typings/interaction'
 import { logger } from '../utils/logger'
 
 export default class JadeClient extends Client {
   // Interactions
-  public readonly applicationCommands = new Collection<string, CommandInteractionType>()
+  public readonly applicationCommands = new Collection<string, ApplicationCommandInteractionType>()
   public readonly messageComponents = new Collection<string, MessageComponentInteractionType>()
   public readonly modalSubmissions = new Collection<string, ModalSubmitInteractionType>()
 
@@ -20,9 +20,20 @@ export default class JadeClient extends Client {
 
   constructor () {
     super({
-      allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
-      intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildPresences],
-      partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User, Partials.GuildMember, Partials.ThreadMember, Partials.GuildScheduledEvent]
+      allowedMentions: { parse: ['users', 'roles', 'everyone'], repliedUser: false },
+      intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions
+      ],
+      partials: [
+        Partials.Message, Partials.Channel, Partials.Reaction,
+        Partials.User, Partials.GuildMember, Partials.ThreadMember,
+        Partials.GuildScheduledEvent
+      ]
     })
   };
 
