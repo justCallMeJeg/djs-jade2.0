@@ -3,7 +3,7 @@ import { readdir, stat } from 'fs/promises'
 import path from 'node:path'
 import type DiscordClientEvent from '../classes/DiscordClientEvent'
 import type JadeClient from '../classes/JadeClient'
-import { type CommandInteractionType, type MessageComponentInteractionType, type ModalSubmitInteractionType } from '../typings/interaction'
+import { type ApplicationCommandInteractionType, type MessageComponentInteractionType, type ModalSubmitInteractionType } from '../typings/interaction'
 
 // Discord Client Event Handler Loader
 async function loadDiscordClientEventHandlers (mainPath: string, client: JadeClient): Promise<void> {
@@ -31,7 +31,7 @@ async function loadApplicationCommandHandlers (mainPath: string, client: JadeCli
       if (stats.isDirectory()) {
         await loadApplicationCommandHandlers(filePath, client)
       } else if ((file.endsWith('.js') || file.endsWith('.ts')) && !file.endsWith('.d.ts')) {
-        const fileData = (await import(filePath)).default as CommandInteractionType
+        const fileData = (await import(filePath)).default as ApplicationCommandInteractionType
         client.applicationCommands.set(fileData.name, fileData)
         delete require.cache[require.resolve(filePath)]
       }

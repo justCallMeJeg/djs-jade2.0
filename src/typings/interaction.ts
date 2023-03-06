@@ -286,13 +286,40 @@ interface BaseInteractionType {
   replyType?: InteractionResponse
 }
 
-// Chat Input Command Interaction Type
-export interface ChatInputCommandInteractionType extends BaseInteractionType, ChatInputApplicationCommandData {
-  type: ApplicationCommandType.ChatInput
-  category: CommandCategoryTypes
-  autocompleteHandler?: AutocompleteInteractionExecuteFunction
+// Autocomplete Option Interaction Handler
+interface AutocompleteOptionInteractionHandler {
+  name: string
+  autocompleteHandler: AutocompleteInteractionExecuteFunction
   callbackHandler: ChatInputCommandInteractionExecuteFunction
 }
+
+// Chat Input Option Interaction Handler
+interface ChatInputOptionInteractionHandler {
+  name: string
+  callbackHandler: ChatInputCommandInteractionExecuteFunction
+}
+
+// Base Command Interaction Type
+interface BaseCommandInteractionType extends BaseInteractionType, ChatInputApplicationCommandData {
+  type: ApplicationCommandType.ChatInput
+  category: CommandCategoryTypes
+}
+
+// Autcomplete Interaction Type
+export interface AutocompleteInteractionType extends BaseCommandInteractionType {
+  optionHandler?: AutocompleteOptionInteractionHandler[]
+  autocompleteHandler: AutocompleteInteractionExecuteFunction
+  callbackHandler: ChatInputCommandInteractionExecuteFunction
+}
+
+// Slash Command Interaction Type
+export interface SlashCommandInteractionType extends BaseCommandInteractionType {
+  optionHandler?: ChatInputOptionInteractionHandler[]
+  callbackHandler: ChatInputCommandInteractionExecuteFunction
+}
+
+// Chat Input Command Interaction Type
+export type ChatInputCommandInteractionType = SlashCommandInteractionType | AutocompleteInteractionType
 
 // User Context Menu Command Interaction Type
 export interface UserContextMenuCommandInteractionType extends BaseInteractionType, UserApplicationCommandData {
@@ -307,7 +334,7 @@ export interface MessageContextMenuCommandInteractionType extends BaseInteractio
 }
 
 // Application Command Interaction Types
-export type CommandInteractionType =
+export type ApplicationCommandInteractionType =
   | ChatInputCommandInteractionType
   | UserContextMenuCommandInteractionType
   | MessageContextMenuCommandInteractionType

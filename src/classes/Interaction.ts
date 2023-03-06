@@ -1,10 +1,17 @@
-import { type ButtonInteractionType, type ChannelSelectMenuInteractionType, type ChatInputCommandInteractionType, type MentionableSelectMenuInteractionType, type MessageContextMenuCommandInteractionType, type ModalSubmitInteractionType, type RoleSelectMenuInteractionType, type StringSelectMenuInteractionType, type UserContextMenuCommandInteractionType, type UserSelectMenuInteractionType } from '../typings/interaction'
+import { type AutocompleteInteractionType, type SlashCommandInteractionType, type ButtonInteractionType, type ChannelSelectMenuInteractionType, type MentionableSelectMenuInteractionType, type MessageContextMenuCommandInteractionType, type ModalSubmitInteractionType, type RoleSelectMenuInteractionType, type StringSelectMenuInteractionType, type UserContextMenuCommandInteractionType, type UserSelectMenuInteractionType } from '../typings/interaction'
 
 // ------------------------------------------------------------
 
-// Chat Input Command Interaction Class
-export class ChatInputCommandInteraction {
-  constructor (options: ChatInputCommandInteractionType) {
+// Slash Command Interaction Class
+export class SlashCommandInteraction {
+  constructor (options: SlashCommandInteractionType) {
+    Object.assign(this, options)
+  }
+}
+
+// Autocomplete Interaction Class
+export class AutocompleteInteraction {
+  constructor (options: AutocompleteInteractionType) {
     Object.assign(this, options)
   }
 }
